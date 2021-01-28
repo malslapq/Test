@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<meta charset="UTF-8">
+<title>카카오톡 api</title>
+<script type="text/javascript">
+	Kakao.init('8d4ee093c2f0ddd97f80b204c266609e');
+	console.log(Kakao.isInitialized());
+	// SDK 초기화 여부를 판단
+	//로그인 창 띄움
+	function loginWithKakao() {
+		Kakao.Auth.login({		//토큰 받아오기
+			success : function(authObj) {	//토큰을 발급 받는데 성공 했을 때
+				Kakao.API.request({		//발급받은 토큰을 가지고 유저 정보 가져오기
+				    url: '/v2/user/me',		//발급받은 토큰을 가지고 유저 정보 가져올 url
+				    success: function(response) {
+				        console.log(response);		//가져온 유저정보 json형태로 콘솔 출력
+				        var id = response.id;
+				        var name = response.kakao_account.profile.nickname;		//json 형태 풀어서 데이터 활용
+				       	var img = response.kakao_account.profile.thumbnail_image_url;
+				        console.log(result);
+				        $('#container').append("<h4>"+id+"</h4>");
+				        $('#container').append("<h4>"+name+"</h4>");
+				        $('#container').append("<img src='"+img+"'</img>");
+				    },
+				    fail: function(error) {
+				        console.log(error);
+				    }
+				});
+			},
+			fail : function(err) {
+				alert(JSON.stringify(err))
+			},
+		})
+	}
+</script>
+</head>
+<body>
+	<h2>카카오톡 자바스크립트 로그인 테스트</h2>
+	<a id="custom-login-btn" href="javascript:loginWithKakao()"> <img
+		src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+		width="222" />
+	</a>
+	<br>
+	<p th:text="${name}">푸딩</p>
+	<a href="http://developers.kakao.com/logout">로그아웃</a>
+	<div id="container">
+	</div>
+</body>
+</html>
