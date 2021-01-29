@@ -27,9 +27,7 @@ import org.springframework.stereotype.Service;
 
 import com.board.DAO.TestDAO;
 import com.board.Model.TestDTO;
-import com.board.Model.TestMapper;
 import com.board.Model.UserDTO;
-import com.board.Model.UserMapper;
 
 @Service
 @Transactional
@@ -99,10 +97,10 @@ public class TestServiceimple implements TestService{
 			row = sheet.createRow(i+1);
 			cell = row.createCell(0);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(list.get(i).getName());
+			cell.setCellValue(list.get(i).getNum());
 			cell = row.createCell(1);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(list.get(i).getNum());
+			cell.setCellValue(list.get(i).getName());
 			cell = row.createCell(2);
 			cell.setCellStyle(bodyStyle);
 			cell.setCellValue(list.get(i).getPhone());
@@ -167,10 +165,10 @@ public class TestServiceimple implements TestService{
 			row = sheet.createRow(i+1);
 			cell = row.createCell(cellcount++);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(list.get(i).getName());
+			cell.setCellValue(list.get(i).getNum());
 			cell = row.createCell(cellcount++);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(list.get(i).getNum());
+			cell.setCellValue(list.get(i).getName());
 			cell = row.createCell(cellcount++);
 			cell.setCellStyle(bodyStyle);
 			cell.setCellValue(list.get(i).getPhone());

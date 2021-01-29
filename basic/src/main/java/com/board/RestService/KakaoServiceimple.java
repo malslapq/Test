@@ -75,6 +75,7 @@ public class KakaoServiceimple implements KakaoService{
             System.out.println("Response Code : " + responseCode);
             ObjectMapper mapper = new ObjectMapper();
             returnNode = mapper.readTree(response.getEntity().getContent());
+            System.out.println(returnNode);
         } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {

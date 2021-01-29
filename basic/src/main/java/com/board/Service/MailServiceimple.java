@@ -26,7 +26,6 @@ public class MailServiceimple implements MailService{
 	public void sendMail(MailSenderDTO dto) {
 		dto.setFrom("malslapq01@naver.com");
 		//메일 받을 사람 메일 주소
-		dto.setTo("");
 		try {
 			MailHandler handler = new MailHandler(mailsender);
 			//받는사람

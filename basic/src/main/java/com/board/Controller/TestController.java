@@ -16,8 +16,7 @@ public class TestController {
 	}
 	
 	@RequestMapping("/mailtest")
-	public String maintest() {
-		return "MailTest";
+	public void mailtest() {
 	}
 	
 	@RequestMapping("/kakaojs")
