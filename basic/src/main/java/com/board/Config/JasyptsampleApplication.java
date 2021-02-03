@@ -23,7 +23,7 @@ public class JasyptsampleApplication implements CommandLineRunner {
 		String pw = spe.encrypt("tjdgus");
 		String mailname = spe.encrypt("seonghyeon");
 		String mailpw = spe.encrypt("1020hani");
-		String db = spe.encrypt("jdbc:mariadb://localhost:3307/officialad?characterEncoding=UTF-8&serverTimezone=Asia/Seoul");
+		String db = spe.encrypt("jdbc:mariadb://localhost:3307/test?characterEncoding=UTF-8&serverTimezone=Asia/Seoul");
 	}
 
 }

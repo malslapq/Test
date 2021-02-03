@@ -18,7 +18,10 @@ import lombok.Setter;
 @Alias("UserDTO")
 public class UserDTO {
 	private int num;
+	private String id;
+	private String passwd;
 	private String name;
 	private String phone;
+	private String auth;
 	private Date regdate;
 }

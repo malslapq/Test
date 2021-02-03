@@ -6,14 +6,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.board.Model.TestDTO;
 import com.board.Model.UserDTO;
 
 
 public interface TestService {
+	public UserDTO selectOne(String id);
 	public void ExcelDown(HttpServletResponse response);
 	public void SXSSFtset(HttpServletResponse response);
-	public int insertUser(TestDTO dto);
+	public int insertUser(UserDTO dto);
 	public List<UserDTO> selectAll();
 	public List<Map<String, Object>> selectAllmap();
 	public List<Map<String, Object>> selectColumn();

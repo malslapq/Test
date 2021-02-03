@@ -20,10 +20,11 @@ public class TestDAOimple implements TestDAO{
 	private UserMapper umapper;
 	
 	@Override
-	public int insertUser(TestDTO dto) {
-		return tmapper.insertUser(dto);
+	public int insertUser(UserDTO dto) {
+		return umapper.insertUser(dto);
 	}
 
+	
 	@Override
 	public List<UserDTO> selectAll() {
 		return umapper.selectAll();
@@ -37,6 +38,11 @@ public class TestDAOimple implements TestDAO{
 	@Override
 	public List<Map<String, Object>> selectColumn() {
 		return umapper.selectColumn();
+	}
+
+	@Override
+	public UserDTO selectOne(String id) {
+		return umapper.selectOne(id);
 	}
 
 }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.board.Model.MailSenderDTO;
-import com.board.Model.TestDTO;
 import com.board.Model.UserDTO;
 import com.board.RestService.KakaoService;
 import com.board.RestService.TestService;
@@ -34,19 +33,19 @@ public class TestRestController {
 	@Autowired
 	private MailService mservice;
 	@Autowired
-	private TestService service;	
+	private TestService service;
 
 	@PutMapping("/insert")
-	public void test(@RequestBody TestDTO dto) {
+	public void test(@RequestBody UserDTO dto) {
 		service.insertUser(dto);
 	}
 
-	@PostMapping("/mailsend")
+	@PostMapping("/admin/mailsend")
 	public void mailtest(@RequestBody MailSenderDTO dto) throws MessagingException, IOException {
 		mservice.sendMail(dto);
 	}
 
-	@GetMapping("/kakaoapi")
+	@GetMapping("/admin/kakaoapi")
 	public Map<String, String> KakaoUserInfo(@RequestParam("code") String code) {
 		String token = kakao.getKakaoToken(code);
 		JsonNode userinfo = kakao.getKakaoUserInfo(token);
@@ -54,7 +53,7 @@ public class TestRestController {
 		return map;
 	}
 
-	@GetMapping("/selectAll")
+	@GetMapping("/admin/selectAll")
 	public List<UserDTO> selectAll() {
 		return service.selectAll();
 	}
@@ -64,13 +63,14 @@ public class TestRestController {
 		return service.selectAllmap();
 	}
 
-	@GetMapping("/excelDown")
+	@GetMapping("/admin/excelDown")
 	public void excelDownload(HttpServletRequest request, HttpServletResponse response) {
 		service.ExcelDown(response);
 	}
 
-	@GetMapping("/sxssf")
+	@GetMapping("/admin/sxssf")
 	public void sxssf(HttpServletResponse response) {
 		service.SXSSFtset(response);
 	}
+	
 }

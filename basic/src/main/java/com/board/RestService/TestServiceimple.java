@@ -23,10 +23,10 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.board.DAO.TestDAO;
-import com.board.Model.TestDTO;
 import com.board.Model.UserDTO;
 
 @Service
@@ -36,8 +36,13 @@ public class TestServiceimple implements TestService{
 	@Autowired
 	private TestDAO dao;
 	
+	@Autowired
+	private PasswordEncoder PasswdEncoder;
+	
 	@Override
-	public int insertUser(TestDTO dto) {
+	public int insertUser(UserDTO dto) {
+		String passwd = PasswdEncoder.encode(dto.getPasswd());
+		dto.setPasswd(passwd);
 		return dao.insertUser(dto);
 	}
 
@@ -122,6 +127,16 @@ public class TestServiceimple implements TestService{
 	}
 
 	@Override
+	public String[] SetHeadColumn(List<Map<String, Object>> columnMaplist) {
+		String[] headname = new String[columnMaplist.size()];  
+		for (int i = 0; i < columnMaplist.size(); i++) {
+			String column = (String) columnMaplist.get(i).get("COLUMN_NAME");
+			headname[i] = column;
+		}
+		return headname;
+	}
+	
+	@Override
 	public void SXSSFtset(HttpServletResponse response) {
 		//데이터 가져오기
 		List<UserDTO> list = dao.selectAll();
@@ -187,15 +202,9 @@ public class TestServiceimple implements TestService{
 	}
 
 	@Override
-	public String[] SetHeadColumn(List<Map<String, Object>> columnMaplist) {
-		String[] headname = new String[columnMaplist.size()];  
-		for (int i = 0; i < columnMaplist.size(); i++) {
-			String column = (String) columnMaplist.get(i).get("COLUMN_NAME");
-			headname[i] = column;
-		}
-		return headname;
+	public UserDTO selectOne(String id) {
+		return dao.selectOne(id);
 	}
-	
-	
+
 
 }
