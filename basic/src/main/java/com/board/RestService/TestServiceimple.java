@@ -27,6 +27,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.board.DAO.TestDAO;
+import com.board.JPA.User;
+import com.board.JPA.UserRepository;
 import com.board.Model.UserDTO;
 
 @Service
@@ -34,17 +36,13 @@ import com.board.Model.UserDTO;
 public class TestServiceimple implements TestService{	
 	
 	@Autowired
+	private UserRepository userrepository;
+	
+	@Autowired
 	private TestDAO dao;
 	
 	@Autowired
 	private PasswordEncoder PasswdEncoder;
-	
-	@Override
-	public int insertUser(UserDTO dto) {
-		String passwd = PasswdEncoder.encode(dto.getPasswd());
-		dto.setPasswd(passwd);
-		return dao.insertUser(dto);
-	}
 
 	@Override
 	public List<UserDTO> selectAll() {
@@ -59,6 +57,16 @@ public class TestServiceimple implements TestService{
 	@Override
 	public List<Map<String, Object>> selectColumn() {
 		return dao.selectColumn();
+	}
+	
+	@Override
+	public String[] SetHeadColumn(List<Map<String, Object>> columnMaplist) {
+		String[] headname = new String[columnMaplist.size()];  
+		for (int i = 0; i < columnMaplist.size(); i++) {
+			String column = (String) columnMaplist.get(i).get("COLUMN_NAME");
+			headname[i] = column;
+		}
+		return headname;
 	}
 	
 	@Override
@@ -124,16 +132,6 @@ public class TestServiceimple implements TestService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public String[] SetHeadColumn(List<Map<String, Object>> columnMaplist) {
-		String[] headname = new String[columnMaplist.size()];  
-		for (int i = 0; i < columnMaplist.size(); i++) {
-			String column = (String) columnMaplist.get(i).get("COLUMN_NAME");
-			headname[i] = column;
-		}
-		return headname;
 	}
 	
 	@Override
@@ -205,6 +203,21 @@ public class TestServiceimple implements TestService{
 	public UserDTO selectOne(String id) {
 		return dao.selectOne(id);
 	}
+	
+	@Override
+	public Boolean idcheck(String id) {
+		Boolean result = true;
+		if (dao.selectOne(id) == null) {
+			result = false;
+		}
+		return result; 
+	}
+	
+	@Override
+	public void save(User user) {
+		user.setPasswd(PasswdEncoder.encode(user.getPasswd()));
+		userrepository.save(user);
+	}
 
-
+	
 }

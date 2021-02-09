@@ -8,7 +8,7 @@ import com.board.Model.UserDTO;
 
 public interface TestDAO {
 	public UserDTO selectOne(String id);
-	public int insertUser(UserDTO dto);
+	public int insert(UserDTO dto);
 	public List<UserDTO> selectAll();
 	public List<Map<String, Object>> selectAllmap();
 	public List<Map<String, Object>> selectColumn();

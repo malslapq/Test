@@ -22,6 +22,6 @@ public class UserDTO {
 	private String passwd;
 	private String name;
 	private String phone;
-	private String auth;
+	private String roles;
 	private Date regdate;
 }

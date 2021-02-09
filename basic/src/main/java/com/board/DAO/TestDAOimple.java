@@ -20,8 +20,8 @@ public class TestDAOimple implements TestDAO{
 	private UserMapper umapper;
 	
 	@Override
-	public int insertUser(UserDTO dto) {
-		return umapper.insertUser(dto);
+	public int insert(UserDTO dto) {
+		return umapper.insert(dto);
 	}
 
 	

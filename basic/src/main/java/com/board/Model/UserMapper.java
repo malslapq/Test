@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
-	public int insertUser(UserDTO dto);
+	public int insert(UserDTO dto);
 	public List<UserDTO> selectAll();
 	public List<Map<String, Object>> selectAllmap();
 	public List<Map<String, Object>> selectColumn();

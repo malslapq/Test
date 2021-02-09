@@ -70,7 +70,6 @@ public class KakaoServiceimple implements KakaoService{
         try {
             final HttpResponse response = client.execute(get);
             final int responseCode = response.getStatusLine().getStatusCode();
- 
             System.out.println("\nSending 'POST' request to URL : " + RequestUrl);
             System.out.println("Response Code : " + responseCode);
             ObjectMapper mapper = new ObjectMapper();

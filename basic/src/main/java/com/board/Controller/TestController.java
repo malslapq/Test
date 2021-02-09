@@ -5,8 +5,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 @Controller
 public class TestController {
+	
+	@RequestMapping("/accessdenied")
+	public void accessdenied() {}
+	
+	@RequestMapping("/updateform")
+	public void updateform() {}
 	
 	@RequestMapping("/insertform")
 	public void insertform() {}
@@ -39,7 +46,7 @@ public class TestController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/index")
+	@RequestMapping(value = "index")
 	public void index() {
 	}
 }
